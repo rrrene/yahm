@@ -1,6 +1,6 @@
 # Yahm
 
-TODO: Write a gem description
+Yahm is a hash to hash translator for ruby.
 
 ## Installation
 
@@ -18,7 +18,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+### Most basic example
+
+```ruby
+require "yahm"
+
+class Record
+  extend Yahm::HashMapper
+  
+  define_mapper :from_other_record do
+    map "/record/id", to: "/id"
+  end
+end
+
+Record.new.from_other_record({ ... })
+=> { :id => "..." }
+```
+
+### More advanced example
+
+```ruby
+require "yahm"
+
+class Record
+  extend Yahm::HashMapper
+  attr_accessor :translated_hash
+  
+  define_mapper :from_other_record, call_setter: :translated_hash= do
+    map "/record/id", to: "/id"
+    map "/record/count", to: "/count", processed_by: :to_i
+    map "/record/subject[0]", to: "/subjects/most_important_subject"
+  end
+end
+
+Record.new.from_other_record({ ... })
+=> { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."} }
+
+Record.translated_hash
+=> { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."} }
+```
 
 ## Contributing
 
