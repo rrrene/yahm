@@ -1,0 +1,2 @@
+module Yahm::HashMapper
+end
