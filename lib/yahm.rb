@@ -1,5 +1,6 @@
 require "yahm/version"
 
-module Yahm
+class Yahm
   require "yahm/hash_mapper"
+  require "yahm/mapping"
 end
