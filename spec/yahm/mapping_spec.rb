@@ -16,15 +16,16 @@ describe Yahm::Mapping do
   describe ".translate_hash" do
     let(:mapping) do
       _mapping = Yahm::Mapping.new
-      _mapping.map "/record_id",        to: "/id"
-      _mapping.map "/record/title",     to: "/tile"
-      _mapping.map "/record/isbns",     to: "/my_data/isbns"
-      _mapping.map "/record/isbns[1]",  to: "/main_isbn"                     # when an array, one can specifiy which element to choose
-      _mapping.map "/record/count",     to: "/count", :processed_by => :to_i # processed_by specifies a method which post_processes to value
-      _mapping.map "/record/languages", to: "/languages", force_array: true
-      _mapping.map "/record/authors",   to: "/authors", split_by: ";"
-      _mapping.map "/record/version",   to: "/version", default: 1
-      _mapping.map "/record/creators",  to: "/creators", force_array: true   # when source value is nil, there should be an empty array in the target hash
+      _mapping.map "/record_id",          to: "/id"
+      _mapping.map "/record/title",       to: "/tile"
+      _mapping.map "/record/isbns",       to: "/my_data/isbns"
+      _mapping.map "/record/isbns[1]",    to: "/main_isbn"                     # when an array, one can specifiy which element to choose
+      _mapping.map "/record/count",       to: "/count", :processed_by => :to_i # processed_by specifies a method which post_processes to value
+      _mapping.map "/record/languages",   to: "/languages", force_array: true
+      _mapping.map "/record/authors",     to: "/authors", split_by: ";"
+      _mapping.map "/record/version",     to: "/version", default: 1
+      _mapping.map "/record/creators",    to: "/creators", force_array: true   # when source value is nil, there should be an empty array in the target hash
+      _mapping.map "/record/publishers",  to: "/publishers", split_by: ";"     # if there are is no source value, this should result to nil in the target hash
       _mapping
     end
 
@@ -54,7 +55,8 @@ describe Yahm::Mapping do
         :languages=>["ger"],
         :authors=>["John Doe", "Jane Doe"],
         :version=>1,
-        :creators=>[]
+        :creators=>[],
+        :publishers=>nil
       })
     end
   end

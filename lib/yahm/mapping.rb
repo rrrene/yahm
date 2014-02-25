@@ -49,7 +49,7 @@ class Yahm::Mapping
     end
 
     unless (split_by_character = rule.last[:split_by]).nil?
-      source_value = source_value.split(split_by_character).map(&:strip)
+      source_value = source_value.split(split_by_character).map(&:strip) unless source_value.nil?
     end
 
     unless rule.last[:force_array].nil?
