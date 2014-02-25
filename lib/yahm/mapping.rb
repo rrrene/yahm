@@ -48,7 +48,17 @@ class Yahm::Mapping
       end
     end
 
+    unless (split_by_character = rule.last[:split_by]).nil?
+      source_value = source_value.split(split_by_character).map(&:strip)
+    end
+
+    unless rule.last[:force_array].nil?
+      source_value = source_value.is_a?(Array) ? source_value : [source_value]
+    end
+
     target_hash_parent_element = target_parent_path.inject(@translated_hash) { |hash, key| hash[key.to_sym] ||= {} }
-    target_hash_parent_element.merge!({ sanitized_target_path.last => source_value })
+    target_hash_parent_element.merge!({
+      sanitized_target_path.last => ((source_value.nil? && !(default_value = rule.last[:default]).nil?) ? default_value : source_value)
+    })
   end
 end
