@@ -16,6 +16,10 @@ Or install it yourself as:
 
     $ gem install yahm
 
+## Dependencies
+
+None
+
 ## Usage
 
 
@@ -46,8 +50,8 @@ class Record
   attr_accessor :translated_hash
   
   define_mapper :from_other_record, call_setter: :translated_hash= do
-    map "/record/id", to: "/id"
-    map "/record/count", to: "/count", processed_by: :to_i
+    map "/record/id",         to: "/id"
+    map "/record/count",      to: "/count", processed_by: :to_i
     map "/record/subject[0]", to: "/subjects/most_important_subject"
   end
 end
