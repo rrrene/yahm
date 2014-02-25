@@ -24,6 +24,7 @@ describe Yahm::Mapping do
       _mapping.map "/record/languages", to: "/languages", force_array: true
       _mapping.map "/record/authors",   to: "/authors", split_by: ";"
       _mapping.map "/record/version",   to: "/version", default: 1
+      _mapping.map "/record/creators",  to: "/creators", force_array: true   # when source value is nil, there should be an empty array in the target hash
       _mapping
     end
 
@@ -52,7 +53,8 @@ describe Yahm::Mapping do
         :count=>3,
         :languages=>["ger"],
         :authors=>["John Doe", "Jane Doe"],
-        :version=>1
+        :version=>1,
+        :creators=>[]
       })
     end
   end

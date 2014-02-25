@@ -53,7 +53,7 @@ class Yahm::Mapping
     end
 
     unless rule.last[:force_array].nil?
-      source_value = source_value.is_a?(Array) ? source_value : [source_value]
+      source_value = (source_value.is_a?(Array) ? source_value : [source_value]).compact
     end
 
     target_hash_parent_element = target_parent_path.inject(@translated_hash) { |hash, key| hash[key.to_sym] ||= {} }
