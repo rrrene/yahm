@@ -59,6 +59,10 @@ Record.translated_hash
 => { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."} }
 ```
 
+## Related work
+
+* hash_mapper (https://github.com/ismasan/hash_mapper)
+
 ## Contributing
 
 1. Fork it ( http://github.com/<my-github-username>/yahm/fork )
