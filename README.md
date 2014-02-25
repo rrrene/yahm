@@ -53,14 +53,17 @@ class Record
     map "/record/id",         to: "/id"
     map "/record/count",      to: "/count", processed_by: :to_i
     map "/record/subject[0]", to: "/subjects/most_important_subject"
+    map "/record/languages",  to: "/languages", force_array: true
+    map "/record/authors",    to: "/authors", split_by: ";"
+    map "/record/version",    to: "/version", default: 1
   end
 end
 
 Record.new.from_other_record({ ... })
-=> { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."} }
+=> { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."}, ... }
 
 Record.translated_hash
-=> { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."} }
+=> { :id => "...", :count => ..., :subjects => { :most_important_subject => "..."}, ... }
 ```
 
 ## Related work
